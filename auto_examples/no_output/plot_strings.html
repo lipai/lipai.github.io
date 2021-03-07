@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Constrained Text output frame &mdash; Lipai&#39;s Notebook July 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Lipai's Notebook
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Jul 2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../me.html"><strong>Pai Li (李湃)</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/periodic_table.html"><strong>Periodic Table</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/unit_convert.html"><strong>Unit Conversion</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts/vasp.html">Vasp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts/super.html">Scripts for job management system on super-computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts/kmc.html">kMC simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts/ml.html">Machine Learning tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../scripts/python.html">Python Scripts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/latex.html">Math notation in Latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/vim.html">Vim skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/Restructured_Text.html">A ReStructuredText Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/pdf_documents.html"><strong>PDF documents</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Gallery of python scripts</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Lipai's Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Constrained Text output frame</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/auto_examples/no_output/plot_strings.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="constrained-text-output-frame">
+<span id="sphx-glr-auto-examples-no-output-plot-strings-py"></span><h1>Constrained Text output frame<a class="headerlink" href="#constrained-text-output-frame" title="Permalink to this headline">¶</a></h1>
+<p>This example captures the stdout and includes it in the
+example. If output is too long it becomes automatically
+framed into a text area.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code source: Óscar Nájera</span>
+<span class="c1"># License: BSD 3 clause</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is a long test Output</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+<span class="n">This</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">long</span> <span class="n">test</span> <span class="n">Output</span>
+</pre></div>
+</div>
+<p>One line out</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;one line out&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">one</span> <span class="n">line</span> <span class="n">out</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the script:</strong> ( 0 minutes  0.000 seconds)</p>
+<div class="sphx-glr-footer docutils container">
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/f58cd1dbe4abac6bf628ad2da55c67d2/plot_strings.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_strings.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/da08987ced85ed43e51ad192b599daf7/plot_strings.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_strings.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.readthedocs.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2023, lipai@mail.ustc.edu.cn.
+      <span class="lastupdated">
+        Last updated on Mar 05, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

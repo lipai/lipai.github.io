@@ -1,0 +1,79 @@
+Convert xyz file to XDATCAR (VASP) file (**Python**)
+===========
+Usage: python xyz2xdat.py xyzfile  
+
+Output: XDATCAR-lipai  
+
+::
+
+      import numpy as np
+      import sys
+      arg_num=len(sys.argv)
+      if arg_num==1:
+           print("no inputs!!!\n")
+           exit()
+      fname=sys.argv[1]
+      xdat=open('XDATCAR-lipai','w')
+      xyz=open(fname,'r')
+      totnum=int(xyz.readline().rstrip('\n'))
+      lat=xyz.readline().rstrip('\n').split('"')[1].split()[:9]
+      lat=np.array([float(i) for i in lat]).reshape(3,3)
+      #lat=np.mat(lat)
+      
+      latI=np.linalg.inv(lat)
+      #print(latI)
+      print("totatoms in the box: ",totnum)
+      #print(lat)
+      #print(latI)
+      xdat.write("lipai@mail.ustc.edu.cn\n")
+      xdat.write("1\n")
+      xdat.write(str(lat[0,0])+' '+str(lat[0,1])+' '+str(lat[0,2])+'\n')
+      xdat.write(str(lat[1,0])+' '+str(lat[1,1])+' '+str(lat[1,2])+'\n')
+      xdat.write(str(lat[2,0])+' '+str(lat[2,1])+' '+str(lat[2,2])+'\n')
+      ele=[]
+      elnum=[]
+      ele1=""
+      eletype=0
+      for i in range(totnum):
+          a=xyz.readline().rstrip('\n').split()[0]
+          if a!=ele1:
+             ele.append(a)
+             elnum.append(1)
+             eletype+=1
+             ele1=a
+          else:
+             elnum[eletype-1]+=1
+      print("Num of element type: ",eletype)
+      print(ele)
+      print(elnum)
+      
+      for i in range(eletype):
+          xdat.write(str(ele[i])+' ')
+      xdat.write('\n')
+      for i in range(eletype):
+          xdat.write(str(elnum[i])+' ')
+      xdat.write('\n')
+            
+      fline=0       
+      while(xyz.readline()!=''):
+          fline=fline+1
+      
+      framenum=fline/(totnum+2)+1
+      print(framenum)
+      
+      xyz.seek(0)
+      
+      from math import floor
+      for i in np.arange(framenum):
+          xyz.readline()
+          xyz.readline()
+          xdat.write("Direct configuration= "+str(int(i+1))+"\n")
+          for j in range(totnum):
+              c=xyz.readline().rstrip('\n').split()[1:4]
+              coor=np.array([float(s) for s in c])
+              coorD=np.matmul(coor,latI)
+              #for x in coorD:
+              #    x=x-floor(x)
+              #print(coorD.shape)
+              xdat.write(str(coorD[0]-floor(coorD[0]))+' '+str(coorD[1]-floor(coorD[1]))+' '+str(coorD[2]-floor(coorD[2]))+'\n')
+      

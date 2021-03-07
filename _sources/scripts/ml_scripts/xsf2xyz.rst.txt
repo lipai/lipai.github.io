@@ -1,0 +1,14 @@
+Convert xsf file to xyz file as GAP training set (**Bash**)
+===========
+
+::
+
+    awk '{if(NR==9) print $1 }' $1  >$2
+    awk '{
+        if(NR==1)  en=$5;
+        if(NR==2)  printf("Lattice=\"");
+        else if(NR>=5&&NR<=7) printf("%s ",$0);
+        else if(NR==9) 
+			printf(" \" Properties=species:S:1:pos:R:3:forces:R:3 energy=%s pbc=\"T T T\"\n",en);
+        else if(NR>9) print $0;
+        }'  $1  >>$2

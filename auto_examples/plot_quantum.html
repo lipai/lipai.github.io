@@ -1,0 +1,363 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Some Quantum Mechanics, filling an atomic orbital &mdash; Lipai&#39;s Notebook July 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Choosing the thumbnail figure" href="plot_choose_thumbnail.html" />
+    <link rel="prev" title="Colormaps alter your perception" href="plot_colors.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Lipai's Notebook
+          
+
+          
+            
+            <img src="../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Jul 2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../me.html"><strong>Pai Li (李湃)</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tools/periodic_table.html"><strong>Periodic Table</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tools/unit_convert.html"><strong>Unit Conversion</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/vasp.html">Vasp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/super.html">Scripts for job management system on super-computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/kmc.html">kMC simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/ml.html">Machine Learning tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/python.html">Python Scripts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/latex.html">Math notation in Latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/vim.html">Vim skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Restructured_Text.html">A ReStructuredText Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/pdf_documents.html"><strong>PDF documents</strong></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Gallery of python scripts</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#general-examples">General examples</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="examples.html">Plotting the exponential function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_examples.html">Plotting the exponential function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_exp.html">Plotting the exponential function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_colors.html">Colormaps alter your perception</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Some Quantum Mechanics, filling an atomic orbital</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_choose_thumbnail.html">Choosing the thumbnail figure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="plot_gallery_version.html">Sphinx-Gallery introduction</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Lipai's Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Gallery of python scripts</a> &raquo;</li>
+        
+      <li>Some Quantum Mechanics, filling an atomic orbital</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/auto_examples/plot_quantum.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p>Click <a class="reference internal" href="#sphx-glr-download-auto-examples-plot-quantum-py"><span class="std std-ref">here</span></a>
+to download the full example code</p>
+</div>
+<div class="sphx-glr-example-title section" id="some-quantum-mechanics-filling-an-atomic-orbital">
+<span id="sphx-glr-auto-examples-plot-quantum-py"></span><h1>Some Quantum Mechanics, filling an atomic orbital<a class="headerlink" href="#some-quantum-mechanics-filling-an-atomic-orbital" title="Permalink to this headline">¶</a></h1>
+<p>Considering an atomic single orbital and how to fill it by use of the
+chemical potential. This system has a four element basis, <span class="math notranslate nohighlight">\(B =
+\{ \lvert \emptyset \rangle, \lvert \uparrow \rangle, \lvert
+\downarrow \rangle, \lvert \uparrow\downarrow \rangle \}\)</span>, that is the
+empty orbital, one spin up electron, one spin down electron and the
+filled orbital.</p>
+<p>The environment of the orbital is set up by an energy cost for
+occupying the orbital, that is <span class="math notranslate nohighlight">\(\epsilon\)</span> and when both
+electrons meet a contact interaction corresponding to the Coulomb
+repulsion <span class="math notranslate nohighlight">\(U\)</span>. Finally the chemical potential <span class="math notranslate nohighlight">\(\mu\)</span> is
+what allows in the Grand canonical picture, to fill up our atomic
+orbital from a reservoir of electrons.</p>
+<blockquote>
+<div><p>The the simple Hamiltonian to model this system is given by:</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\mathcal{H} =
+     \sum_{\sigma=\uparrow,\downarrow} \epsilon c^\dagger_\sigma c_\sigma
+    + Un_\uparrow n_\downarrow - \mu \hat{N}\]</div>
+<p>Here <span class="math notranslate nohighlight">\(c^\dagger,c\)</span> creation and annihilation operators,
+<span class="math notranslate nohighlight">\(n=c^\dagger c\)</span>, and
+<span class="math notranslate nohighlight">\(\hat{N}=n_\uparrow+n_\downarrow\)</span>. This Hamiltonian is diagonal
+in the basis of particle number we have chosen earlier, as the basis
+elements are also eigenvectors.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{H} \lvert \emptyset \rangle &amp;= 0 \\
+\mathcal{H} \lvert \uparrow  \rangle &amp;= (\epsilon - \mu) | \uparrow  \rangle \\
+\mathcal{H} \lvert \downarrow  \rangle &amp;= (\epsilon - \mu) | \downarrow  \rangle \\
+\mathcal{H} \lvert \uparrow\downarrow \rangle &amp;= (2\epsilon - 2\mu +U) \lvert \uparrow\downarrow \rangle\end{split}\]</div>
+<p>It is easy to see, that the system will prefer to be empty if
+<span class="math notranslate nohighlight">\(\mu \in [0,\epsilon)\)</span>, be single occupied if <span class="math notranslate nohighlight">\(\mu \in (\epsilon, \epsilon +U)\)</span>
+and doubly occupied if <span class="math notranslate nohighlight">\(\mu &gt; \epsilon +U\)</span>.</p>
+<p>For a more rigorous treatment, the partition function has to be
+calculated and then the expected particle number can be
+found. Introducing a new variable <span class="math notranslate nohighlight">\(\xi = \epsilon - \mu\)</span>, and
+<span class="math notranslate nohighlight">\(\beta\)</span> corresponding to the inverse temperature of the system.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{Z} &amp;= Tr(e^{-\beta \mathcal{H}}) = 1 + 2e^{-\beta\xi} + e^{-\beta(2\xi + U)} \\
+\langle \hat{N} \rangle &amp;= \frac{1}{\beta} \frac{\partial}{\partial \mu} \ln \mathcal{Z}\end{split}\]</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Code source: Óscar Nájera</span>
+<span class="c1"># License: BSD 3 clause</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">800</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]:</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">mu</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)))</span> <span class="o">/</span> \
+        <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">mu</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\beta=</span><span class="si">{0}</span><span class="s2">$&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\mu$ ($\epsilon=1$, $U=1$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\langle N \rangle=\langle n_\uparrow \rangle+\langle n_\downarrow\rangle$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="plot quantum" class="sphx-glr-single-img" src="../_images/sphx_glr_plot_quantum_001.png" />
+<p>test</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;lipai&#39;s notebook&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p class="sphx-glr-script-out">Out:</p>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>lipai&#39;s notebook
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> ( 0 minutes  0.141 seconds)</p>
+<div class="sphx-glr-footer class sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-plot-quantum-py">
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/4f9fd87ac8b2f2e88f627e4a8331559d/plot_quantum.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_quantum.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../_downloads/d893c3af5c3699b229e4fd6ca6362d7d/plot_quantum.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_quantum.ipynb</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="plot_choose_thumbnail.html" class="btn btn-neutral float-right" title="Choosing the thumbnail figure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="plot_colors.html" class="btn btn-neutral float-left" title="Colormaps alter your perception" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2023, lipai@mail.ustc.edu.cn.
+      <span class="lastupdated">
+        Last updated on Mar 06, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

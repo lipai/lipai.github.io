@@ -1,0 +1,94 @@
+GAP Usage (**Python/Bash**)
+===========
+
+One needs the following files in the working folder:  
+  INCAR-md, INCAR-static, POSCAR, POTCAR, KPOINTS
+
+::
+
+      #lipai@mail.ustc.edu.cn
+      import os
+      MPI="~/bin/mpirun"
+      VASP="vasp_std"
+      runvasp=MPI+" -n 64 "+VASP+";"
+      #runvasp="mpirun -n 24 vasp.5.3.5;"
+      
+      os.system("mkdir MD;\
+                 cp POSCAR KPOINTS POTCAR MD;\
+                 cp INCAR-md MD/INCAR;\
+                 cd MD;"\
+                 +runvasp+\
+                "outcar2xyz.sh;\
+                 cp all.xyz ..;\
+                 cd ..")
+      
+      gap_fit="gap_fit at_file=all.xyz \
+              force_parameter_name=forces \
+              gap={ soap cutoff=5.0 \
+                atom_sigma=0.5 \
+                l_max=6 \
+                n_max=10 \
+                delta=0.5 \
+                covariance_type=dot_product \
+                zeta=4 \
+                n_sparse=400 \
+                add_species=T \
+                sparse_method=cur_points} \
+      e0={C:0:Cu:0} \
+      default_sigma={0.010 0.20 0.0 0.0} \
+      do_copy_at_file=F sparse_separate_file=F \
+      gp_file=gap_soap.xml 2>&1 | grep -v FoX "
+      
+      os.system(gap_fit)
+      os.system("cp gap_soap.xml gap_3000.xml")
+      
+      from ase import Atoms,units
+      import ase.io
+      from ase.io.trajectory import Trajectory
+      from ase.md.nvtberendsen import NVTBerendsen
+      from quippy.potential import Potential
+      
+      T=[2000,1800,1600,1400,1200,1000,800,600]
+      N=[50,  200,  400, 500, 400, 250, 100, 50]
+      
+      for tt,i in enumerate(T):
+          print("GAP MD at "+str(i)+" K")
+          calc = Potential(param_filename='gap_soap.xml')
+          CuC = ase.io.read("POSCAR")
+          CuC.set_calculator(calc)
+          dyn = NVTBerendsen(CuC,2*units.fs,temperature=i,taut=0.2*1000*units.fs,fixcm=False)
+          traj = Trajectory('gap.traj', 'w', CuC)
+          dyn.attach(traj.write, interval=1)
+          dyn.run(100*N[tt])   
+          out_traj = ase.io.read('gap.traj', ':')
+          os.system("mkdir "+str(i))
+          n=0
+          for at in out_traj:
+              at.wrap()
+              if 'momenta' in at.arrays: del at.arrays['momenta']
+              n=n+1
+              if n%100==0:
+                  dir_i=str(i)+"/"+str(n)+"/"
+                  os.system("mkdir "+dir_i+";\
+                             cp KPOINTS POTCAR "+dir_i+";\
+                             cp INCAR-static "+dir_i+"INCAR")
+                  ase.io.write(dir_i+"POSCAR",out_traj[n-1])
+                  os.system("cd "+dir_i+";"+runvasp+"cd ../..")
+          ase.io.write(str(i)+"_gap.xyz",out_traj[99::100])
+          os.system("cd "+str(i)+"; \
+                     for i in *; do \
+                       cd $i;\
+                       outcar2xyz.sh;\
+                       cat all.xyz >> ../../"+str(i)+"_vasp.xyz;\
+                       cat all.xyz >> ../../all.xyz;\
+                       cd ..;\
+                     done;\
+                     cd ..")
+          
+          os.system(gap_fit)
+          os.system("cp gap_soap.xml gap_"+str(i)+".xml")
+      
+
+To get GP error, use::
+
+      quip verbosity=ANALYSIS atoms_filename=test.xyz param_filename=gap_soap.xml E=T F=T L=T calc_args="local_gap_variance" output_file=a.out

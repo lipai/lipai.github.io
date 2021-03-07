@@ -1,0 +1,442 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Unit Conversion &mdash; Lipai&#39;s Notebook July 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Vasp" href="../scripts/vasp.html" />
+    <link rel="prev" title="Periodic Table" href="periodic_table.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Lipai's Notebook
+          
+
+          
+            
+            <img src="../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Jul 2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../me.html"><strong>Pai Li (李湃)</strong></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="periodic_table.html"><strong>Periodic Table</strong></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><strong>Unit Conversion</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/vasp.html">Vasp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/super.html">Scripts for job management system on super-computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/kmc.html">kMC simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/ml.html">Machine Learning tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../scripts/python.html">Python Scripts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/latex.html">Math notation in Latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/vim.html">Vim skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/Restructured_Text.html">A ReStructuredText Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/pdf_documents.html"><strong>PDF documents</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Lipai's Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li><strong>Unit Conversion</strong></li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/tools/unit_convert.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="unit-conversion">
+<h1><strong>Unit Conversion</strong><a class="headerlink" href="#unit-conversion" title="Permalink to this headline">¶</a></h1>
+<html >
+
+<body>
+
+<div class="constants-list units-list">
+	<h3 align="center">Unit Conversion</h3>
+    <table border="1" cellpadding=6>
+    <tbody><tr>
+    <th colspan="9"> Energy Units </th>
+    </tr>
+    <tr>
+    <th width="10%"> <br>      </th>
+    <th width="10%"> Hartree (2Ry)</th>
+    <th width="10%"> eV      </th>
+    <th width="10%"> cm<sup>-1</sup> </th>
+    <th width="10%"> kcal/mol </th>
+    <th width="10%"> kJ/mol </th>
+    <th width="10%"> Kelvin </th>
+    <th width="10%"> J     </th>
+    <th width="10%"> Hz    </th>
+    </tr>
+    
+    <tr>
+    <th> Hartree      </th> <!--.. Unit ..-->
+    <td> 1 </td> <!--..  hartree ..-->
+    <td> 27.2107 </td> <!--..  eV ..-->
+    <td> 219 474.63 </td> <!--..  cm-1 ..-->
+    <td> 627.503  </td> <!--..  kcal/mol ..-->
+    <td> 2 625.5 </td> <!--..  kJ/mol ..-->
+    <td> 315 777. </td> <!--..  K ..-->
+    <td> 43.60 x 10<sup>-19</sup> </td> <!--..  J ..-->
+    <td> 6.57966 x 10<sup>+15</sup> </td> <!--..  Hz ..-->
+    </tr>
+    
+    <tr>
+    <th> eV </th> <!--.. Unit ..-->
+    <td> 0.0367502 </td> <!--..  hartree ..-->
+    <td> 1 </td> <!--..  eV ..-->
+    <td> 8 065.73 </td> <!--..  cm-1 ..-->
+    <td> 23.060 9 </td> <!--..  kcal/mol ..-->
+    <td> 96.486 9 </td> <!--..  kJ/mol ..-->
+    <td> 11 604.9 </td> <!--..  K ..-->
+    <td> 1.602 10 x 10<sup>-19</sup> </td> <!--..  J ..-->
+    <td> 2.418 04 x 10<sup>+14</sup> </td> <!--..  Hz ..-->
+    </tr>
+    
+    <tr>
+    <th> cm<sup>-1</sup></th> <!--.. Unit ..-->
+    <td> 4.556 33 x 10<sup>-6</sup> </td> <!--..  hartree ..-->
+    <td> 1.239 81 x 10<sup>-4</sup> </td> <!--..  eV ..-->
+    <td> 1 </td> <!--..  cm-1 ..-->
+    <td> 0.002 859 11 </td> <!--..  kcal/mol ..-->
+    <td> 0.011 962 7  </td> <!--..  kJ/mol ..-->
+    <td> 1.428 79 </td> <!--..  K ..-->
+    <td> 1.986 30 x 10<sup>-23</sup> </td> <!--..  J ..-->
+    <td> 2.997 93 x 10<sup>+10</sup> </td> <!--..  Hz ..-->
+    </tr>
+    
+    <tr>
+    <th> kcal/mol      </th> <!--.. Unit ..-->
+    <td> 0.001 593 62 </td> <!--..  hartree ..-->
+    <td> 0.043 363 4 </td> <!--..  eV ..-->
+    <td> 349.757  </td> <!--..  cm-1 ..-->
+    <td> 1 </td> <!--..  kcal/mol ..-->
+    <td> 4.18400 </td> <!--..  kJ/mol ..-->
+    <td> 503.228 </td> <!--..  K ..-->
+    <td> 6.95 x 10<sup>-21</sup> </td> <!--..  J ..-->
+    <td> 1.048 54 x 10<sup>+13</sup> </td> <!--..  Hz ..-->
+    </tr>
+    
+    <tr>
+    <th> kJ/mol </th> <!--.. Unit ..-->
+    <td> 0.000 380 88 </td> <!--..  hartree ..-->
+    <td> 0.010 364 10 </td> <!--..  eV ..-->
+    <td> 83.593 </td> <!--..  cm-1 ..-->
+    <td> 0.239001 </td> <!--..  kcal/mol ..-->
+    <td> 1 </td> <!--..  kJ/mol ..-->
+    <td> 120.274  </td> <!--..  K ..-->
+    <td> 1.66 x 10<sup>-21</sup> </td> <!--..  J ..-->
+    <td> 2.506 07 x 10<sup>+12</sup> </td> <!--..  Hz ..-->
+    </tr>
+    
+    <tr>
+    <th> Kelvin </th> <!--.. Unit ..-->
+    <td> 0.000 003 166 78 </td> <!--..  hartree ..-->
+    <td> 0.000 086 170 5 </td> <!--..  eV ..-->
+    <td> 0.695 028  </td> <!--..  cm-1 ..-->
+    <td> 0.001 987 17 </td> <!--..  kcal/mol ..-->
+    <td> 0.008 314 35 </td> <!--..  kJ/mol ..-->
+    <td> 1 </td> <!--..  K ..-->
+    <td> 1.380 54 x 10<sup>-23</sup> </td> <!--..  J ..-->
+    <td> 2.083 64 x 10<sup>+10</sup></td> <!--..  Hz ..-->
+    </tr>
+    
+    <tr>
+    <th> J </th> <!--.. Unit ..-->
+    <td> 2.294 x 10<sup>+17</sup> </td> <!--..  hartree ..-->
+    <td> 6.241 81 x 10<sup>+18</sup> </td> <!--..  eV ..-->
+    <td> 5.034 45 x 10<sup>+22</sup> </td> <!--..  cm-1 ..-->
+    <td> 1.44 x 10<sup>+20</sup> </td> <!--..  kcal/mol ..-->
+    <td> 6.02 x 10<sup>+20</sup> </td> <!--..  kJ/mol ..-->
+    <td> 7.243 54 x 10<sup>+22</sup>  </td> <!--..  K ..-->
+    <td>  1 </td> <!--..  J ..-->
+    <td> 1.509 30 x 10<sup>+33</sup> </td> <!--..  Hz ..-->
+    </tr>
+    
+    <tr>
+    <th> Hz </th> <!--.. Unit ..-->
+    <td> 1.519 83 x 10<sup>-16</sup> </td> <!--..  hartree ..-->
+    <td> 4.135 58 x 10<sup>-15</sup> </td> <!--..  eV ..-->
+    <td> 3.335 65 x 10<sup>-11</sup> </td> <!--..  cm-1 ..-->
+    <td> 9.537 02 x 10<sup>-14</sup> </td> <!--..  kcal/mol ..-->
+    <td> <br> </td> <!--..  kJ/mol ..-->
+    <td> 4.799 30 x 10<sup>-11</sup> </td> <!--..  K ..-->
+    <td> 6.625 61 x 10<sup>-34</sup> </td> <!--..  J ..-->
+    <td> 1 </td> <!--..  Hz ..-->
+    </tr>
+    
+    </tbody></table>
+    
+    
+    * Ref:<a href="http://physics.nist.gov/cuu/Constants/energy.html">NIST Energy Equivalents</a>
+    
+    <p></p>
+    <table border="1" cellpadding=6>
+    <tbody><tr>
+    <th colspan="5"> Pressure Units </th>
+    </tr>
+    <tr>
+    <th width="20%"> <br>      </th>
+    <th width="20%"> bar </th>
+    <th width="20%"> mmHg </th>
+    <th width="20%"> N/m<sup>2</sup>(pascal) </th>
+    <th width="20%"> torr </th>
+    </tr>
+    
+    <tr>
+    <th> bar      </th> <!--.. Unit ..-->
+    <td> 1 </td> <!--..  bar ..-->
+    <td> 750.061 561 3 </td> <!--..  mmHg ..-->
+    <td> 10<sup>5</sup> </td> <!--..  pascal ..-->
+    <td> 750.061 673 82 </td> <!--..  torr ..-->
+    
+    </tr>
+    
+    <tr>
+    <th> mmHg     </th> <!--.. Unit ..-->
+    <td> 0.001 333 223 9 </td> <!--..  bar ..-->
+    <td> 1 </td> <!--..  mmHg ..-->
+    <td> 133.322 39 </td> <!--.. pascal ..-->
+    <td> 1.000 000 15 </td> <!--.. torr ..-->
+    </tr>
+    
+    <tr>
+    <th> pascal </th> <!--.. Unit ..-->
+    <td> 10<sup>-5</sup> </td> <!--..  bar ..-->
+    <td> 0.007 500 615 613 </td> <!--..  mmHg ..-->
+    <td> 1 </td> <!--.. pascal ..-->
+    <td> 0.007 500 616 738 2 </td> <!--..  torr ..-->
+    </tr>
+    
+    <tr>
+    <th> torr </th> <!--.. Unit ..-->
+    <td> 0.001 333 223 7  </td> <!--..  bar ..-->
+    <td> 0.999 999 849 99 </td> <!--..  mmHg ..-->
+    <td> 133.322 37 </td> <!--..  pascal ..-->
+    <td> 1 </td> <!--..  torr ..-->
+    </tr>
+    
+    </tbody></table>
+</div>
+
+
+</body>
+</html>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../scripts/vasp.html" class="btn btn-neutral float-right" title="Vasp" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="periodic_table.html" class="btn btn-neutral float-left" title="Periodic Table" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2023, lipai@mail.ustc.edu.cn.
+      <span class="lastupdated">
+        Last updated on Mar 06, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

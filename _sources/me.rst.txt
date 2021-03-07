@@ -1,0 +1,30 @@
+**Pai Li (李湃)**
+----
+
+    2009.09-2013.06  
+	 B.S.  `Hunan university <http://www-en.hnu.edu.cn/index.htm>`_  (Changsha, China)
+
+    2013.09-2018.12  
+	 PhD   `University of science and technology of china <http://en.ustc.edu.cn/>`_ (Hefei, China)
+
+    2018.06-2020.11  
+     PostDoc  `University of science and technology of china <http://en.ustc.edu.cn/>`_ (Hefei,China)
+      in `Prof. Zhenyu Li's Group <http://staff.ustc.edu.cn/~zyli/>`_
+
+    2020.12-         
+     PostDoc  `IBS <https://www.ibs.re.kr/eng.do>`_ & `UNIST <https://www.unist.ac.kr/>`_ (Ulsan, Korea)
+      in `Prof. Feng Ding's Group <https://cmcm.ibs.re.kr/cmcm/?MM=02&SM=03>`_
+
+    Interested in ionic materials, machine learning potential, condensed matter science. 
+
+    Email: lipai@mail.ustc.edu.cn; lipai91@gmail.com
+
+Publications
+=========
+
+	`Google Scholar <https://scholar.google.com.hk/citations?user=YmSkcHQAAAAJ&hl=en>`_
+
+The backgroud scenery is the famous Yellow Mountain (黄山) in China.
+
+.. figure::  _static/lipai.jpg
+   :align:   center

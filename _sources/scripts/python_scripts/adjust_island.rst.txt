@@ -1,0 +1,47 @@
+Adjust graphene island position on Cu surface
+==============
+
+::
+
+	import numpy as np
+	import os
+	center=np.array([23.1136519648,19.7414802492])   #rotation center
+
+	a1=np.array([2.5523713014,0.00])       #surface lattice constant
+	a2=np.array([1.2708864505,2.2132145881])       #surface lattice constant
+
+	data_pos=np.loadtxt("pos")    #graphene island coordinates
+	ii=0
+	for i in np.arange(0,1,0.1):
+		for j in np.arange(0,1,0.1):
+			tx,ty=i*a1+j*a2
+			for theta in np.arange(0,np.pi/3,np.pi/60):
+			#for theta in [np.pi]:
+				ii+=1
+				rot=np.eye(3)
+				rot[0,0]=np.cos(theta)
+				rot[0,1]=-np.sin(theta)
+				rot[1,0]=np.sin(theta)
+				rot[1,1]=np.cos(theta)
+				
+				data=data_pos.copy()
+				for data_i in data:
+					trans=np.eye(3)
+					trans[:2,2]=center
+					inv_trans=np.eye(3)
+					inv_trans[:2,2]=-center
+					data_temp=np.insert(data_i[:2],2,values=1).reshape(-1,1)
+					data_temp=np.matmul(inv_trans,data_temp)
+					data_temp=np.matmul(rot,data_temp)
+					data_temp=np.matmul(trans,data_temp)
+					data_temp=data_temp.T[0]
+					#data_temp=data_temp.reshape(1,-1)
+					data_i[:2]=data_temp[:2]
+					data_i[0]+=tx
+					data_i[1]+=ty
+
+				np.savetxt("pos_temp",data)
+				os.system("cat pos_head pos_temp > POSCAR_"+str(ii)+".vasp")
+
+	os.system("mkdir POS;mv POSCAR* POS")
+

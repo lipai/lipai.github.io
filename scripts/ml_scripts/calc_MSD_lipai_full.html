@@ -1,0 +1,573 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Calculate MSD from unwraped XYZ file (Python/Fortran) &mdash; Lipai&#39;s Notebook July 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Aenet calculator that can be used in ASE" href="calculator_aenet.html" />
+    <link rel="prev" title="GAP Usage (Python/Bash)" href="GAP_usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Lipai's Notebook
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Jul 2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../me.html"><strong>Pai Li (李湃)</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/periodic_table.html"><strong>Periodic Table</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/unit_convert.html"><strong>Unit Conversion</strong></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../vasp.html">Vasp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super.html">Scripts for job management system on super-computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmc.html">kMC simulation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ml.html">Machine Learning tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ml.html#useful-tools-on-web-for-free">Useful tools on web for free</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ml.html#scripts">Scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="GAP_usage.html">GAP Usage (<strong>Python/Bash</strong>)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Calculate MSD from unwraped XYZ file (<strong>Python/Fortran</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calculator_aenet.html">Aenet calculator that can be used in ASE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract_xyz.html">Uniformly extract partial structures from a xyz set file.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian2xsf.html">Extract data from Gaussian output file *.log to series XSF files (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmp2xyz.html">Convert lammps structure to xyz file (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outcar2xsf.html">Extract data from OUTCAR to series XSF files as AENET training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outcar2xyz.html">Extract data from OUTCAR to series XYZ files as GAP training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2lmp.html">Convert POSCAR(VASP) structure to LAMMPS structure file (<strong>Fortran</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2raw.html">Convert POSCAR created by ASE to raw file as DeePMD-kit training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2xsf.html">Convert POSCAR to XSF files (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_get_species_num.html">Calculate species numbers in a large configuration (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_traj.xyz2pos.html">Extract poscar files from traj.xyz (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xdat2xyz_unwraped.html">Convert XDATCAR(VASP) trajectory to unwraped xyz file (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xsf2raw.html">Convert xsf file to raw file as DeePMD-kit training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xsf2xyz.html">Convert xsf file to xyz file as GAP training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xyz2xdat.html">Convert xyz file to XDATCAR (VASP) file (<strong>Python</strong>)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python Scripts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/latex.html">Math notation in Latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/vim.html">Vim skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/Restructured_Text.html">A ReStructuredText Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/pdf_documents.html"><strong>PDF documents</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Lipai's Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../ml.html">Machine Learning tools</a> &raquo;</li>
+        
+      <li>Calculate MSD from unwraped XYZ file (<strong>Python/Fortran</strong>)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/scripts/ml_scripts/calc_MSD_lipai_full.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="calculate-msd-from-unwraped-xyz-file-python-fortran">
+<h1>Calculate MSD from unwraped XYZ file (<strong>Python/Fortran</strong>)<a class="headerlink" href="#calculate-msd-from-unwraped-xyz-file-python-fortran" title="Permalink to this headline">¶</a></h1>
+<p>Unwraped xyz file can be extracted from ase trajectory using the following python script:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ase.io</span>
+<span class="c1"># save traj in .xyz --- the .traj is a non human readable database file</span>
+<span class="n">out_traj</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;test.traj&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">out_traj</span><span class="p">:</span>
+<span class="c1">#    at.wrap()    #! This function wraps the atoms into primitive box for each frame</span>
+    <span class="k">if</span> <span class="s1">&#39;momenta&#39;</span> <span class="ow">in</span> <span class="n">at</span><span class="o">.</span><span class="n">arrays</span><span class="p">:</span> <span class="k">del</span> <span class="n">at</span><span class="o">.</span><span class="n">arrays</span><span class="p">[</span><span class="s1">&#39;momenta&#39;</span><span class="p">]</span>
+<span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;test.xyz&#39;</span><span class="p">,</span> <span class="n">out_traj</span><span class="p">,</span> <span class="s1">&#39;xyz&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you are analysing the XDATCAR (VASP) trajectory, use this python script to convert it into unwraped xyz file.</p>
+<p>Usage: Python filename.py</p>
+<p>You should have XDATCAR file in the working path.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#lipai@mail.ustc.edu.cn</span>
+<span class="c1">#convert XDATCAR to unwraped xyz file</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<span class="n">xdatcar</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;XDATCAR&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<span class="n">xyz</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;XDATCAR.xyz&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+
+<span class="n">system</span> <span class="o">=</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
+
+<span class="c1">#get lattice vectors</span>
+<span class="n">a1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">scale</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="p">])</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">scale</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="p">])</span>
+<span class="n">a3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">scale</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="p">])</span>
+
+<span class="n">comment</span><span class="o">=</span><span class="s1">&#39;Lattice=</span><span class="se">\&quot;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a1</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">comment</span><span class="o">=</span><span class="n">comment</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a2</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a2</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a2</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">comment</span><span class="o">=</span><span class="n">comment</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a3</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a3</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39; &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">a3</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&quot;</span><span class="s1">&#39;</span>
+
+<span class="c1">#Read xdatcar</span>
+<span class="n">element_names</span> <span class="o">=</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">element_dict</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">element_numbers</span> <span class="o">=</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">Natom</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">Ntype</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">element_names</span><span class="p">)</span>
+<span class="n">Nname</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Ntype</span><span class="p">):</span>
+    <span class="n">Natom</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">element_numbers</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">element_numbers</span><span class="p">[</span><span class="n">t</span><span class="p">])):</span>
+        <span class="n">Nname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element_names</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Ntype</span><span class="p">,</span><span class="n">Natom</span><span class="p">)</span>
+
+<span class="n">f_prev</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">Natom</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">f_next</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">Natom</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">line</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="n">xyz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Natom</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">+</span><span class="n">comment</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Natom</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">xdatcar</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+        <span class="n">f_next</span><span class="p">[</span><span class="n">atom</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="nb">float</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">p</span> <span class="p">])</span>
+        <span class="n">f_next</span><span class="p">[</span><span class="n">atom</span><span class="p">,:]</span> <span class="o">-=</span> <span class="n">np</span><span class="o">.</span><span class="n">around</span><span class="p">(</span><span class="n">f_next</span><span class="p">[</span><span class="n">atom</span><span class="p">,:]</span><span class="o">-</span><span class="n">f_prev</span><span class="p">[</span><span class="n">atom</span><span class="p">,:])</span>
+
+        <span class="n">c_coords</span><span class="o">=</span><span class="n">f_next</span><span class="p">[</span><span class="n">atom</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">a1</span><span class="o">+</span><span class="n">f_next</span><span class="p">[</span><span class="n">atom</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">a2</span><span class="o">+</span><span class="n">f_next</span><span class="p">[</span><span class="n">atom</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">*</span><span class="n">a3</span>
+        <span class="n">xyz</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">Nname</span><span class="p">[</span><span class="n">atom</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c_coords</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c_coords</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">c_coords</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span><span class="o">+</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">f_prev</span><span class="o">=</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">f_next</span><span class="p">)</span>
+
+<span class="n">xdatcar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">xyz</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The code for calculating the MSD from xyz file with full sampling is as follows (Recommended):</p>
+<p>Usage: ./a.out filename.xyz Nind</p>
+<p>which calculates the MSD of the Nind-th atom. There fore Nind should be a positive integer and not larger than the total number of atoms. If one set Nind to be 0, it calculates MSD of all atoms and save msd results in the folder msd_all.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!lipai@mail.ustc.edu.cn
+program xyz2msd
+implicit none
+integer :: ArgNum,i,j,k
+character(len=20) :: filename,str1
+integer :: Nind,AtomNum,FrameNum,Nline
+
+real,dimension(3,3)::Lattice
+
+real,dimension(:,:,:),allocatable :: xyz
+real,dimension(:),allocatable   :: msd
+real,dimension(:,:),allocatable :: msd_i
+character(2) :: temp
+integer :: stat1
+
+ArgNum=command_argument_count()
+if(ArgNum/=2) then
+   write(*,*) &quot;Wrong input argument!&quot;
+   stop
+end if
+call get_command_argument(1,filename)
+filename=trim(adjustl(filename))
+call get_command_argument(2,str1)
+read(str1,*) Nind
+
+open(unit=111,file=filename,status=&#39;old&#39;)
+
+read(111,*) AtomNum
+Nline=1
+do
+  read(111,*,iostat=stat1)
+  Nline=Nline+1
+  if(stat1/=0) exit
+end do
+FrameNum=Nline/(AtomNum+2)
+write(*,*) AtomNum,FrameNum
+allocate(xyz(FrameNum,AtomNum,3))
+
+rewind(111)
+do i=1,FrameNum
+  read(111,*)
+  read(111,*)
+  do j=1,AtomNum
+    read(111,*) temp, xyz(i,j,:)
+  end do
+end do
+close(111)
+
+allocate(msd(FrameNum),msd_i(FrameNum,3))
+if(Nind==0) then
+   call system(&quot;mkdir msd_all&quot;)
+   do i=1,AtomNum
+       call get_msd_ind(i,pre=&quot;msd_all/&quot;)
+   end do
+else
+   if(Nind&gt;AtomNum) then
+       write(*,*) &quot;Error! Nind&gt;AtomNum&quot;
+       stop
+   end if
+   call get_msd_ind(Nind)
+end if
+
+contains
+subroutine get_msd_ind(ind,pre)
+implicit none
+integer,intent(in) :: ind
+character(*),optional,intent(in)  :: pre
+character(20) :: outname
+integer :: del_t,n,m,Fd
+write(outname,*) ind
+if(present(pre)) then
+    outname=pre//trim(adjustl(outname))
+else
+    outname=trim(adjustl(outname))
+end if
+write(*,*) &quot;Dealing with &quot;//outname//&quot;.msd&quot;
+write(*,*) ind
+msd=0
+msd_i=0
+do del_t=1,FrameNum-1
+  Fd=FrameNum-del_t
+  if(mod(del_t,100)==0) write(*,*) del_t
+  do n=1,Fd
+    do m=1,3
+        msd_i(del_t,m)=msd_i(del_t,m)+((xyz(n+del_t,ind,m)-xyz(n,ind,m))**2)/Fd
+    end do
+  end do
+  do m=1,3
+      msd(del_t)=msd(del_t)+msd_i(del_t,m)
+  end do
+end do
+open(99,file=trim(adjustl(outname))//&quot;.msd&quot;,status=&quot;replace&quot;)
+open(98,file=trim(adjustl(outname))//&quot;.msd_i&quot;,status=&quot;replace&quot;)
+do del_t=1,framenum-1
+    write(99,*) msd(del_t)
+    write(98,*) msd_i(del_t,:)
+end do
+close(99)
+close(98)
+end subroutine
+
+end program
+</pre></div>
+</div>
+<p>You may also try the following code which takes lease sampling. Its algorithm is the same with thatprovided by Muratahan Aykol, whose script can also be found in this website.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!lipai@mail.ustc.edu.cn
+program xyz2msd
+implicit none
+integer :: ArgNum,i,j,k
+character(len=20) :: filename,str1
+integer :: Nind,AtomNum,FrameNum
+
+real,dimension(3,3)::Lattice
+
+real,dimension(:,:,:),allocatable :: xyz
+real,dimension(:),allocatable   :: msd
+real,dimension(:,:),allocatable :: msd_i
+character(2) :: temp
+integer :: stat1
+
+ArgNum=command_argument_count()
+if(ArgNum/=2) then
+   write(*,*) &quot;Wrong input argument!&quot;
+   stop
+end if
+call get_command_argument(1,filename)
+filename=trim(adjustl(filename))
+call get_command_argument(2,str1)
+read(str1,*) Nind
+
+open(unit=111,file=filename,status=&#39;old&#39;)
+
+read(111,*) AtomNum
+do
+  read(111,*,iostat=stat1)
+  Nline=Nline+1
+  if(stat1/=0) exit
+end do
+FrameNum=Nline/(AtomNum+2)
+write(*,*) AtomNum,FrameNum
+allocate(xyz(FrameNum,AtomNum,3))
+
+rewind(111)
+do i=1,FrameNum
+  read(111,*)
+  read(111,*)
+  do j=1,AtomNum
+    read(111,*) temp, xyz(i,j,:)
+  end do
+end do
+close(111)
+
+allocate(msd(FrameNum),msd_i(FrameNum,3))
+if(Nind==0) then
+   call system(&quot;mkdir msd_all&quot;)
+   do i=1,AtomNum
+       call get_msd_ind(i,pre=&quot;msd_all/&quot;)
+   end do
+else
+   if(Nind&gt;AtomNum) then
+       write(*,*) &quot;Error! Nind&gt;AtomNum&quot;
+       stop
+   end if
+   call get_msd_ind(Nind)
+end if
+
+contains
+subroutine get_msd_ind(ind,pre)
+implicit none
+integer,intent(in) :: ind
+character(*),optional,intent(in)  :: pre
+character(20) :: outname
+integer :: del_t,n,m,Fd
+write(outname,*) ind
+if(present(pre)) then
+    outname=pre//trim(adjustl(outname))
+else
+    outname=trim(adjustl(outname))
+end if
+write(*,*) &quot;Dealing with &quot;//outname//&quot;.msd&quot;
+write(*,*) ind
+msd=0
+msd_i=0
+do del_t=1,FrameNum-1
+  Fd=FrameNum-del_t
+  if(mod(del_t,100)==0) write(*,*) del_t
+  do m=1,3
+      msd_i(del_t,m)=(xyz(del_t+1,ind,m)-xyz(1,ind,m))**2
+  end do
+  do m=1,3
+      msd(del_t)=msd(del_t)+msd_i(del_t,m)
+  end do
+end do
+open(99,file=trim(adjustl(outname))//&quot;.msd&quot;,status=&quot;replace&quot;)
+open(98,file=trim(adjustl(outname))//&quot;.msd_i&quot;,status=&quot;replace&quot;)
+do del_t=1,framenum-1
+    write(99,*) msd(del_t)
+    write(98,*) msd_i(del_t,:)
+end do
+close(99)
+close(98)
+end subroutine
+
+end program
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="calculator_aenet.html" class="btn btn-neutral float-right" title="Aenet calculator that can be used in ASE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="GAP_usage.html" class="btn btn-neutral float-left" title="GAP Usage (Python/Bash)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2023, lipai@mail.ustc.edu.cn.
+      <span class="lastupdated">
+        Last updated on Mar 06, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

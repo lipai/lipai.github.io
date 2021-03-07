@@ -1,0 +1,295 @@
+Calculate MSD from unwraped XYZ file (**Python/Fortran**)
+===========
+
+Unwraped xyz file can be extracted from ase trajectory using the following python script:
+
+::
+
+     import ase.io
+     # save traj in .xyz --- the .traj is a non human readable database file
+     out_traj = ase.io.read('test.traj', ':')
+     for at in out_traj:
+     #    at.wrap()    #! This function wraps the atoms into primitive box for each frame
+         if 'momenta' in at.arrays: del at.arrays['momenta']
+     ase.io.write('test.xyz', out_traj, 'xyz')      
+
+If you are analysing the XDATCAR (VASP) trajectory, use this python script to convert it into unwraped xyz file.
+
+Usage: Python filename.py
+
+You should have XDATCAR file in the working path.
+
+::
+
+     #lipai@mail.ustc.edu.cn
+     #convert XDATCAR to unwraped xyz file
+     import numpy as np
+     from copy import deepcopy
+     
+     xdatcar = open('XDATCAR', 'r')
+     xyz = open('XDATCAR.xyz', 'w')
+     
+     system = xdatcar.readline()
+     scale = float(xdatcar.readline().rstrip('\n'))
+     print(scale)
+     
+     #get lattice vectors
+     a1 = np.array([ float(s)*scale for s in xdatcar.readline().rstrip('\n').split() ])
+     a2 = np.array([ float(s)*scale for s in xdatcar.readline().rstrip('\n').split() ])
+     a3 = np.array([ float(s)*scale for s in xdatcar.readline().rstrip('\n').split() ])
+     
+     comment='Lattice=\"'+str(a1[0])+' '+str(a1[1])+' '+str(a1[2])
+     comment=comment+str(a2[0])+' '+str(a2[1])+' '+str(a2[2])
+     comment=comment+str(a3[0])+' '+str(a3[1])+' '+str(a3[2])+'\"'
+     
+     #Read xdatcar
+     element_names = xdatcar.readline().rstrip('\n').split()
+     
+     element_dict = {}
+     element_numbers = xdatcar.readline().rstrip('\n').split()
+     
+     Natom = 0
+     Ntype = len(element_names)
+     Nname=[]
+     for t in range(Ntype):
+         Natom += int(element_numbers[t])
+         for i in range(int(element_numbers[t])):
+             Nname.append(element_names[t])
+     
+     print(Ntype,Natom)
+     
+     f_prev=np.zeros([Natom,3])
+     f_next=np.zeros([Natom,3])
+     while True:
+         line = xdatcar.readline()
+         if len(line) == 0:
+             break
+         xyz.write(str(Natom) + "\n"+comment+"\n")
+     
+         for atom in range(Natom):
+             p = xdatcar.readline().rstrip('\n').split()
+             f_next[atom,:] = np.array([ float(s) for s in p ])
+             f_next[atom,:] -= np.around(f_next[atom,:]-f_prev[atom,:])
+     
+             c_coords=f_next[atom,0]*a1+f_next[atom,1]*a2+f_next[atom,2]*a3
+             xyz.write(Nname[atom]+" "+str(c_coords[0])+" "+str(c_coords[1])+" "+str(c_coords[2])+"\n")
+     
+         f_prev=deepcopy(f_next)
+     
+     xdatcar.close()
+     xyz.close()
+
+The code for calculating the MSD from xyz file with full sampling is as follows (Recommended):
+
+Usage: ./a.out filename.xyz Nind
+
+which calculates the MSD of the Nind-th atom. There fore Nind should be a positive integer and not larger than the total number of atoms. If one set Nind to be 0, it calculates MSD of all atoms and save msd results in the folder msd_all.
+
+::
+     
+     !lipai@mail.ustc.edu.cn
+     program xyz2msd
+     implicit none
+     integer :: ArgNum,i,j,k
+     character(len=20) :: filename,str1
+     integer :: Nind,AtomNum,FrameNum,Nline
+     
+     real,dimension(3,3)::Lattice
+     
+     real,dimension(:,:,:),allocatable :: xyz
+     real,dimension(:),allocatable   :: msd
+     real,dimension(:,:),allocatable :: msd_i
+     character(2) :: temp
+     integer :: stat1
+     
+     ArgNum=command_argument_count()
+     if(ArgNum/=2) then
+        write(*,*) "Wrong input argument!"
+        stop
+     end if
+     call get_command_argument(1,filename)
+     filename=trim(adjustl(filename))
+     call get_command_argument(2,str1)
+     read(str1,*) Nind
+     
+     open(unit=111,file=filename,status='old')
+     
+     read(111,*) AtomNum
+     Nline=1
+     do 
+       read(111,*,iostat=stat1)
+       Nline=Nline+1
+       if(stat1/=0) exit
+     end do
+     FrameNum=Nline/(AtomNum+2)
+     write(*,*) AtomNum,FrameNum
+     allocate(xyz(FrameNum,AtomNum,3))
+     
+     rewind(111)
+     do i=1,FrameNum
+       read(111,*)
+       read(111,*)
+       do j=1,AtomNum
+         read(111,*) temp, xyz(i,j,:)   
+       end do
+     end do
+     close(111)        
+     
+     allocate(msd(FrameNum),msd_i(FrameNum,3))
+     if(Nind==0) then
+        call system("mkdir msd_all")
+        do i=1,AtomNum
+            call get_msd_ind(i,pre="msd_all/")
+        end do
+     else
+        if(Nind>AtomNum) then
+            write(*,*) "Error! Nind>AtomNum"
+            stop
+        end if
+        call get_msd_ind(Nind)
+     end if
+     
+     contains
+     subroutine get_msd_ind(ind,pre)
+     implicit none
+     integer,intent(in) :: ind
+     character(*),optional,intent(in)  :: pre
+     character(20) :: outname
+     integer :: del_t,n,m,Fd
+     write(outname,*) ind
+     if(present(pre)) then
+         outname=pre//trim(adjustl(outname))
+     else 
+         outname=trim(adjustl(outname))
+     end if
+     write(*,*) "Dealing with "//outname//".msd"
+     write(*,*) ind
+     msd=0
+     msd_i=0
+     do del_t=1,FrameNum-1
+       Fd=FrameNum-del_t
+       if(mod(del_t,100)==0) write(*,*) del_t
+       do n=1,Fd
+         do m=1,3
+             msd_i(del_t,m)=msd_i(del_t,m)+((xyz(n+del_t,ind,m)-xyz(n,ind,m))**2)/Fd
+         end do
+       end do
+       do m=1,3
+           msd(del_t)=msd(del_t)+msd_i(del_t,m)
+       end do
+     end do
+     open(99,file=trim(adjustl(outname))//".msd",status="replace")
+     open(98,file=trim(adjustl(outname))//".msd_i",status="replace")
+     do del_t=1,framenum-1
+         write(99,*) msd(del_t)
+         write(98,*) msd_i(del_t,:)
+     end do
+     close(99)
+     close(98)
+     end subroutine
+     
+     end program
+
+You may also try the following code which takes lease sampling. Its algorithm is the same with thatprovided by Muratahan Aykol, whose script can also be found in this website.
+
+::
+     
+      !lipai@mail.ustc.edu.cn
+      program xyz2msd
+      implicit none
+      integer :: ArgNum,i,j,k
+      character(len=20) :: filename,str1
+      integer :: Nind,AtomNum,FrameNum
+      
+      real,dimension(3,3)::Lattice
+      
+      real,dimension(:,:,:),allocatable :: xyz
+      real,dimension(:),allocatable   :: msd
+      real,dimension(:,:),allocatable :: msd_i
+      character(2) :: temp
+      integer :: stat1
+      
+      ArgNum=command_argument_count()
+      if(ArgNum/=2) then
+         write(*,*) "Wrong input argument!"
+         stop
+      end if
+      call get_command_argument(1,filename)
+      filename=trim(adjustl(filename))
+      call get_command_argument(2,str1)
+      read(str1,*) Nind
+      
+      open(unit=111,file=filename,status='old')
+      
+      read(111,*) AtomNum
+      do 
+        read(111,*,iostat=stat1)
+        Nline=Nline+1
+        if(stat1/=0) exit
+      end do
+      FrameNum=Nline/(AtomNum+2)
+      write(*,*) AtomNum,FrameNum
+      allocate(xyz(FrameNum,AtomNum,3))
+      
+      rewind(111)
+      do i=1,FrameNum
+        read(111,*)
+        read(111,*)
+        do j=1,AtomNum
+          read(111,*) temp, xyz(i,j,:)   
+        end do
+      end do
+      close(111)        
+      
+      allocate(msd(FrameNum),msd_i(FrameNum,3))
+      if(Nind==0) then
+         call system("mkdir msd_all")
+         do i=1,AtomNum
+             call get_msd_ind(i,pre="msd_all/")
+         end do
+      else
+         if(Nind>AtomNum) then
+             write(*,*) "Error! Nind>AtomNum"
+             stop
+         end if
+         call get_msd_ind(Nind)
+      end if
+      
+      contains
+      subroutine get_msd_ind(ind,pre)
+      implicit none
+      integer,intent(in) :: ind
+      character(*),optional,intent(in)  :: pre
+      character(20) :: outname
+      integer :: del_t,n,m,Fd
+      write(outname,*) ind
+      if(present(pre)) then
+          outname=pre//trim(adjustl(outname))
+      else 
+          outname=trim(adjustl(outname))
+      end if
+      write(*,*) "Dealing with "//outname//".msd"
+      write(*,*) ind
+      msd=0
+      msd_i=0
+      do del_t=1,FrameNum-1
+        Fd=FrameNum-del_t
+        if(mod(del_t,100)==0) write(*,*) del_t
+        do m=1,3
+            msd_i(del_t,m)=(xyz(del_t+1,ind,m)-xyz(1,ind,m))**2
+        end do
+        do m=1,3
+            msd(del_t)=msd(del_t)+msd_i(del_t,m)
+        end do
+      end do
+      open(99,file=trim(adjustl(outname))//".msd",status="replace")
+      open(98,file=trim(adjustl(outname))//".msd_i",status="replace")
+      do del_t=1,framenum-1
+          write(99,*) msd(del_t)
+          write(98,*) msd_i(del_t,:)
+      end do
+      close(99)
+      close(98)
+      end subroutine
+      
+      end program

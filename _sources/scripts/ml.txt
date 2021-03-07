@@ -1,0 +1,18 @@
+Machine Learning tools
+====
+
+Useful tools on web for free
+-------------------
+- `AENET  <http:///>`_
+- `AMP <http://>`_
+
+Scripts
+-------
+.. toctree::
+   maxdepth: 2
+
+   ml_scripts/gaussian2xsf.rst
+   ml_scripts/lmp2xyz.rst
+   ml_scripts/outcar2xsf.rst
+   ml_scripts/pos2lmp.rst
+   ml_scripts/pos2xsf.rst

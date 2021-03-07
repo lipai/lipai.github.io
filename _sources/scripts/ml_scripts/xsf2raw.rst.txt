@@ -1,0 +1,26 @@
+Convert xsf file to raw file as DeePMD-kit training set (**Bash**)
+===========
+
+::
+
+	rm *.raw
+
+	num=`ls |wc|awk '{print $1-1}'`
+
+	for i in `seq 1 $num`
+	do
+		awk '{
+			  if(NR==1)   print $5 >>"energy.raw";
+			  else if(NR>=5&&NR<=7)  printf("%9.6f %9.6f %9.6f ",$1,$2,$3)>>"box.raw";
+			  else if(NR>=10) {
+					printf("%9.6f %9.6f %9.6f ",$2,$3,$4) >>"coord.raw";
+					printf("%9.6f %9.6f %9.6f ",$5,$6,$7) >>"force.raw";
+			  }}' $i.xsf 
+		echo >>box.raw
+		echo >>coord.raw
+		echo >>force.raw
+	done
+
+	awk '{if(NR>=10) {if($1=="Cu") printf("0 "); else printf("1 ")}}' 1.xsf>>type.raw
+	echo >>type.raw
+

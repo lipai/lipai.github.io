@@ -1,0 +1,40 @@
+Uniformly extract partial structures from a xyz set file.
+===========
+
+usage:    ./extract_xyz.sh   N  infile	
+
+N is the interval number of structures that will not be selected.  
+
+Therefore, the larger N, the smaller the size of outfile.
+
+The outfile name is infile-N.xyz 
+
+
+::
+
+	name=`echo $2|cut -f 1 -d . `
+	outfile=$name-$1.xyz
+	awk -v sp=$1 '{
+		if(a==0){
+			if(NF==1) {
+				str++;
+				num=$1+1;
+				if(str%sp==1){
+					a=1;
+					print $0
+				}
+				else  a=2;
+			}
+			else print "err!"
+		}
+		else if(a==1){
+			print $0;
+			num--;
+			if(num==0) a=0;
+		}
+		else if(a==2){
+			num--;
+			if(num==0) a=0;
+		}
+	} ' $2 > $outfile
+

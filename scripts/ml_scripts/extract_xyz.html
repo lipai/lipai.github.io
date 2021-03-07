@@ -1,0 +1,323 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Uniformly extract partial structures from a xyz set file. &mdash; Lipai&#39;s Notebook July 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Extract data from Gaussian output file *.log to series XSF files (Bash)" href="gaussian2xsf.html" />
+    <link rel="prev" title="Aenet calculator that can be used in ASE" href="calculator_aenet.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Lipai's Notebook
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Jul 2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../me.html"><strong>Pai Li (李湃)</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/periodic_table.html"><strong>Periodic Table</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/unit_convert.html"><strong>Unit Conversion</strong></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../vasp.html">Vasp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super.html">Scripts for job management system on super-computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmc.html">kMC simulation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ml.html">Machine Learning tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ml.html#useful-tools-on-web-for-free">Useful tools on web for free</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ml.html#scripts">Scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="GAP_usage.html">GAP Usage (<strong>Python/Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calc_MSD_lipai_full.html">Calculate MSD from unwraped XYZ file (<strong>Python/Fortran</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calculator_aenet.html">Aenet calculator that can be used in ASE</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Uniformly extract partial structures from a xyz set file.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian2xsf.html">Extract data from Gaussian output file *.log to series XSF files (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmp2xyz.html">Convert lammps structure to xyz file (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outcar2xsf.html">Extract data from OUTCAR to series XSF files as AENET training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outcar2xyz.html">Extract data from OUTCAR to series XYZ files as GAP training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2lmp.html">Convert POSCAR(VASP) structure to LAMMPS structure file (<strong>Fortran</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2raw.html">Convert POSCAR created by ASE to raw file as DeePMD-kit training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2xsf.html">Convert POSCAR to XSF files (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_get_species_num.html">Calculate species numbers in a large configuration (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_traj.xyz2pos.html">Extract poscar files from traj.xyz (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xdat2xyz_unwraped.html">Convert XDATCAR(VASP) trajectory to unwraped xyz file (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xsf2raw.html">Convert xsf file to raw file as DeePMD-kit training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xsf2xyz.html">Convert xsf file to xyz file as GAP training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xyz2xdat.html">Convert xyz file to XDATCAR (VASP) file (<strong>Python</strong>)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python Scripts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/latex.html">Math notation in Latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/vim.html">Vim skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/Restructured_Text.html">A ReStructuredText Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/pdf_documents.html"><strong>PDF documents</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Lipai's Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../ml.html">Machine Learning tools</a> &raquo;</li>
+        
+      <li>Uniformly extract partial structures from a xyz set file.</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/scripts/ml_scripts/extract_xyz.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="uniformly-extract-partial-structures-from-a-xyz-set-file">
+<h1>Uniformly extract partial structures from a xyz set file.<a class="headerlink" href="#uniformly-extract-partial-structures-from-a-xyz-set-file" title="Permalink to this headline">¶</a></h1>
+<p>usage:    ./extract_xyz.sh   N  infile</p>
+<p>N is the interval number of structures that will not be selected.</p>
+<p>Therefore, the larger N, the smaller the size of outfile.</p>
+<p>The outfile name is infile-N.xyz</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>name=`echo $2|cut -f 1 -d . `
+outfile=$name-$1.xyz
+awk -v sp=$1 &#39;{
+        if(a==0){
+                if(NF==1) {
+                        str++;
+                        num=$1+1;
+                        if(str%sp==1){
+                                a=1;
+                                print $0
+                        }
+                        else  a=2;
+                }
+                else print &quot;err!&quot;
+        }
+        else if(a==1){
+                print $0;
+                num--;
+                if(num==0) a=0;
+        }
+        else if(a==2){
+                num--;
+                if(num==0) a=0;
+        }
+} &#39; $2 &gt; $outfile
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="gaussian2xsf.html" class="btn btn-neutral float-right" title="Extract data from Gaussian output file *.log to series XSF files (Bash)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="calculator_aenet.html" class="btn btn-neutral float-left" title="Aenet calculator that can be used in ASE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2023, lipai@mail.ustc.edu.cn.
+      <span class="lastupdated">
+        Last updated on Mar 06, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

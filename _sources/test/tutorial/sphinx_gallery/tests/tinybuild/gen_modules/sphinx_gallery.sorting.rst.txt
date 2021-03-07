@@ -1,0 +1,57 @@
+.. Please when editing this file make sure to keep it matching the
+   docs in ../advanced_configuration.rst:reference_to_examples
+
+sphinx_gallery.sorting
+======================
+
+.. automodule:: sphinx_gallery.sorting
+
+   
+   
+
+   Functions
+   ---------
+
+   
+
+   .. autofunction:: extract_intro_and_title
+
+   .. include:: backreferences/sphinx_gallery.sorting.extract_intro_and_title.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: split_code_and_text_blocks
+
+   .. include:: backreferences/sphinx_gallery.sorting.split_code_and_text_blocks.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+   
+   
+
+   
+   
+
+   Classes
+   -------
+
+   
+   .. autoclass:: ExampleTitleSortKey
+      :members:
+   .. autoclass:: ExplicitOrder
+      :members:
+   .. autoclass:: FileNameSortKey
+      :members:
+   .. autoclass:: FileSizeSortKey
+      :members:
+   .. autoclass:: NumberOfCodeLinesSortKey
+      :members:
+   
+   
+
+   
+   
+   

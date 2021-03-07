@@ -1,0 +1,14 @@
+**Periodic Table**
+----
+
+1. RSC
+    https://www.rsc.org/periodic-table
+
+2. Pubchem
+    https://pubchem.ncbi.nlm.nih.gov/periodic-table/
+
+3. Ptable (中文)
+    https://ptable.com/
+
+.. figure::  ../_static/periodic_table.png
+   :align:   center

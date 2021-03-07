@@ -1,0 +1,324 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>plotdist.sh &mdash; Lipai&#39;s Notebook July 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="plot Band Structure" href="bash_python_plot_band.html" />
+    <link rel="prev" title="plot_structure.sh" href="bash_plot_structure.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Lipai's Notebook
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Jul 2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../me.html"><strong>Pai Li (李湃)</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/periodic_table.html"><strong>Periodic Table</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/unit_convert.html"><strong>Unit Conversion</strong></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../vasp.html">Vasp</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../vasp.html#useful-tools-on-web">Useful tools on web</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../vasp.html#scripts">Scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="bash_cif2pos.html">cif2pos.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bash_converge.html">converg.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bash_fix_atom.html">fix_atom.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bash_get_vibration.html">get_vibration.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bash_plot_structure.html">plot_structure.sh</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">plotdist.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bash_python_plot_band.html">plot Band Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_calculate_freq.html">calculate thermodymamics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_idpp_neb.html">Idpp method for creating initial NEB path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_plot_dos_band.html">plot DOS &amp; Band Structure</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../super.html">Scripts for job management system on super-computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmc.html">kMC simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ml.html">Machine Learning tools</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python Scripts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/latex.html">Math notation in Latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/vim.html">Vim skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/Restructured_Text.html">A ReStructuredText Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/pdf_documents.html"><strong>PDF documents</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Lipai's Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../vasp.html">Vasp</a> &raquo;</li>
+        
+      <li>plotdist.sh</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/scripts/vasp_scripts/bash_plotdist.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="plotdist-sh">
+<h1>plotdist.sh<a class="headerlink" href="#plotdist-sh" title="Permalink to this headline">¶</a></h1>
+<p>This bash script supervises distant changes of structures in VASP optimization.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+touch p1 p2;
+touch dist.conv
+Num=`awk &#39;NR==7{for(i=1;i&lt;=NF;i++) a=$i+a;}END{print a}&#39; XDATCAR`
+Lnum=`wc XDATCAR|awk &#39;{print $1}&#39;`
+((n=(Lnum-7)/(Num+1)))
+head -7 XDATCAR &gt;p1
+awk -v num=&quot;$Num&quot; &#39;NR==9,NR==(num+1)+7{print $0}&#39; XDATCAR &gt;&gt;p1
+for((i=1;i&lt;n;i++))
+do
+cat p1 &gt;p2
+head -7 XDATCAR &gt;p1
+((n1=9+(Num+1)*i))
+((n2=(i+1)*(Num+1)+7))
+sed -n &#39;&#39;$n1&#39;,&#39;$n2&#39;p&#39; XDATCAR &gt;&gt;p1
+echo -e $i&quot;\t&quot;`dist.pl p1 p2 ` &gt;&gt;dist.conv
+done
+# plot
+gnuplot &lt;&lt;EOF
+set grid
+set term post
+set output &#39;b.ps&#39;
+set xlabel &#39;Ion steps&#39;
+set title &#39;Distance between each ion steps&#39;
+unset key
+set ylabel &#39;dist(Angst)&#39;
+plot &#39;dist.conv&#39; u 1:2 w l lw 2 lc rgb &quot;blue&quot;
+EOF
+gs -sDEVICE=jpeg -r300 -sPAPERSIZE=a4 -dBATCH -dNOPAUSE -sOutputFile=dist.jpg b.ps
+convert -rotate 90 dist.jpg dist.jpg
+mogrify -trim dist.jpg
+gnuplot &lt;&lt;EOF
+set term dumb
+plot &#39;dist.conv&#39; w l t &quot;Dist &quot;
+EOF
+rm b.ps p1 p2 dist.conv
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="bash_python_plot_band.html" class="btn btn-neutral float-right" title="plot Band Structure" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="bash_plot_structure.html" class="btn btn-neutral float-left" title="plot_structure.sh" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2023, lipai@mail.ustc.edu.cn.
+      <span class="lastupdated">
+        Last updated on Mar 06, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

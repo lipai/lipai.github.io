@@ -1,0 +1,197 @@
+.. Please when editing this file make sure to keep it matching the
+   docs in ../advanced_configuration.rst:reference_to_examples
+
+sphinx_gallery.gen_rst
+======================
+
+.. automodule:: sphinx_gallery.gen_rst
+
+   
+   
+
+   Functions
+   ---------
+
+   
+
+   .. autofunction:: clean_modules
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.clean_modules.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: codestr2rst
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.codestr2rst.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: execute_code_block
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.execute_code_block.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: extract_intro_and_title
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.extract_intro_and_title.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: figure_rst
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.figure_rst.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: generate_dir_rst
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.generate_dir_rst.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: generate_file_rst
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.generate_file_rst.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: get_md5sum
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.get_md5sum.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: glr_path_static
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.glr_path_static.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: handle_exception
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.handle_exception.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: indent
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.indent.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: jupyter_notebook
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.jupyter_notebook.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: md5sum_is_current
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.md5sum_is_current.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: save_figures
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.save_figures.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: save_notebook
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.save_notebook.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: save_thumbnail
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.save_thumbnail.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: scale_image
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.scale_image.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: split_code_and_text_blocks
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.split_code_and_text_blocks.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: time
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.time.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+
+   .. autofunction:: write_backreferences
+
+   .. include:: backreferences/sphinx_gallery.gen_rst.write_backreferences.examples
+
+   .. raw:: html
+
+	       <div style='clear:both'></div>
+   
+   
+
+   
+   
+
+   Classes
+   -------
+
+   
+   .. autoclass:: LooseVersion
+      :members:
+   .. autoclass:: MixedEncodingStringIO
+      :members:
+   .. autoclass:: StringIO
+      :members:
+   
+   
+
+   
+   
+   

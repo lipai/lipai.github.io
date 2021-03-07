@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>GAP Usage (Python/Bash) &mdash; Lipai&#39;s Notebook July 2020 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-binder.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-dataframe.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/gallery-rendered-html.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Calculate MSD from unwraped XYZ file (Python/Fortran)" href="calc_MSD_lipai_full.html" />
+    <link rel="prev" title="Machine Learning tools" href="../ml.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Lipai's Notebook
+          
+
+          
+            
+            <img src="../../_static/logo.jpg" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                Jul 2020
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../me.html"><strong>Pai Li (李湃)</strong></a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/periodic_table.html"><strong>Periodic Table</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tools/unit_convert.html"><strong>Unit Conversion</strong></a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../vasp.html">Vasp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../super.html">Scripts for job management system on super-computer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kmc.html">kMC simulation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../ml.html">Machine Learning tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../ml.html#useful-tools-on-web-for-free">Useful tools on web for free</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../ml.html#scripts">Scripts</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">GAP Usage (<strong>Python/Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calc_MSD_lipai_full.html">Calculate MSD from unwraped XYZ file (<strong>Python/Fortran</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calculator_aenet.html">Aenet calculator that can be used in ASE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extract_xyz.html">Uniformly extract partial structures from a xyz set file.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gaussian2xsf.html">Extract data from Gaussian output file *.log to series XSF files (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lmp2xyz.html">Convert lammps structure to xyz file (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outcar2xsf.html">Extract data from OUTCAR to series XSF files as AENET training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="outcar2xyz.html">Extract data from OUTCAR to series XYZ files as GAP training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2lmp.html">Convert POSCAR(VASP) structure to LAMMPS structure file (<strong>Fortran</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2raw.html">Convert POSCAR created by ASE to raw file as DeePMD-kit training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pos2xsf.html">Convert POSCAR to XSF files (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_get_species_num.html">Calculate species numbers in a large configuration (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="python_traj.xyz2pos.html">Extract poscar files from traj.xyz (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xdat2xyz_unwraped.html">Convert XDATCAR(VASP) trajectory to unwraped xyz file (<strong>Python</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xsf2raw.html">Convert xsf file to raw file as DeePMD-kit training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xsf2xyz.html">Convert xsf file to xyz file as GAP training set (<strong>Bash</strong>)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xyz2xdat.html">Convert xyz file to XDATCAR (VASP) file (<strong>Python</strong>)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../python.html">Python Scripts</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/latex.html">Math notation in Latex</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/vim.html">Vim skills</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/Restructured_Text.html">A ReStructuredText Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/pdf_documents.html"><strong>PDF documents</strong></a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Lipai's Notebook</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../ml.html">Machine Learning tools</a> &raquo;</li>
+        
+      <li>GAP Usage (<strong>Python/Bash</strong>)</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/scripts/ml_scripts/GAP_usage.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="gap-usage-python-bash">
+<h1>GAP Usage (<strong>Python/Bash</strong>)<a class="headerlink" href="#gap-usage-python-bash" title="Permalink to this headline">¶</a></h1>
+<dl class="simple">
+<dt>One needs the following files in the working folder:</dt><dd><p>INCAR-md, INCAR-static, POSCAR, POTCAR, KPOINTS</p>
+</dd>
+</dl>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#lipai@mail.ustc.edu.cn</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">MPI</span><span class="o">=</span><span class="s2">&quot;~/bin/mpirun&quot;</span>
+<span class="n">VASP</span><span class="o">=</span><span class="s2">&quot;vasp_std&quot;</span>
+<span class="n">runvasp</span><span class="o">=</span><span class="n">MPI</span><span class="o">+</span><span class="s2">&quot; -n 64 &quot;</span><span class="o">+</span><span class="n">VASP</span><span class="o">+</span><span class="s2">&quot;;&quot;</span>
+<span class="c1">#runvasp=&quot;mpirun -n 24 vasp.5.3.5;&quot;</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;mkdir MD;</span><span class="se">\</span>
+<span class="s2">           cp POSCAR KPOINTS POTCAR MD;</span><span class="se">\</span>
+<span class="s2">           cp INCAR-md MD/INCAR;</span><span class="se">\</span>
+<span class="s2">           cd MD;&quot;</span>\
+           <span class="o">+</span><span class="n">runvasp</span><span class="o">+</span>\
+          <span class="s2">&quot;outcar2xyz.sh;</span><span class="se">\</span>
+<span class="s2">           cp all.xyz ..;</span><span class="se">\</span>
+<span class="s2">           cd ..&quot;</span><span class="p">)</span>
+
+<span class="n">gap_fit</span><span class="o">=</span><span class="s2">&quot;gap_fit at_file=all.xyz </span><span class="se">\</span>
+<span class="s2">        force_parameter_name=forces </span><span class="se">\</span>
+<span class="s2">        gap={ soap cutoff=5.0 </span><span class="se">\</span>
+<span class="s2">          atom_sigma=0.5 </span><span class="se">\</span>
+<span class="s2">          l_max=6 </span><span class="se">\</span>
+<span class="s2">          n_max=10 </span><span class="se">\</span>
+<span class="s2">          delta=0.5 </span><span class="se">\</span>
+<span class="s2">          covariance_type=dot_product </span><span class="se">\</span>
+<span class="s2">          zeta=4 </span><span class="se">\</span>
+<span class="s2">          n_sparse=400 </span><span class="se">\</span>
+<span class="s2">          add_species=T </span><span class="se">\</span>
+<span class="s2">          sparse_method=cur_points} </span><span class="se">\</span>
+<span class="s2">e0={C:0:Cu:0} </span><span class="se">\</span>
+<span class="s2">default_sigma={0.010 0.20 0.0 0.0} </span><span class="se">\</span>
+<span class="s2">do_copy_at_file=F sparse_separate_file=F </span><span class="se">\</span>
+<span class="s2">gp_file=gap_soap.xml 2&gt;&amp;1 | grep -v FoX &quot;</span>
+
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">gap_fit</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;cp gap_soap.xml gap_3000.xml&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">ase</span> <span class="kn">import</span> <span class="n">Atoms</span><span class="p">,</span><span class="n">units</span>
+<span class="kn">import</span> <span class="nn">ase.io</span>
+<span class="kn">from</span> <span class="nn">ase.io.trajectory</span> <span class="kn">import</span> <span class="n">Trajectory</span>
+<span class="kn">from</span> <span class="nn">ase.md.nvtberendsen</span> <span class="kn">import</span> <span class="n">NVTBerendsen</span>
+<span class="kn">from</span> <span class="nn">quippy.potential</span> <span class="kn">import</span> <span class="n">Potential</span>
+
+<span class="n">T</span><span class="o">=</span><span class="p">[</span><span class="mi">2000</span><span class="p">,</span><span class="mi">1800</span><span class="p">,</span><span class="mi">1600</span><span class="p">,</span><span class="mi">1400</span><span class="p">,</span><span class="mi">1200</span><span class="p">,</span><span class="mi">1000</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">]</span>
+<span class="n">N</span><span class="o">=</span><span class="p">[</span><span class="mi">50</span><span class="p">,</span>  <span class="mi">200</span><span class="p">,</span>  <span class="mi">400</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">tt</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">T</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GAP MD at &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot; K&quot;</span><span class="p">)</span>
+    <span class="n">calc</span> <span class="o">=</span> <span class="n">Potential</span><span class="p">(</span><span class="n">param_filename</span><span class="o">=</span><span class="s1">&#39;gap_soap.xml&#39;</span><span class="p">)</span>
+    <span class="n">CuC</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s2">&quot;POSCAR&quot;</span><span class="p">)</span>
+    <span class="n">CuC</span><span class="o">.</span><span class="n">set_calculator</span><span class="p">(</span><span class="n">calc</span><span class="p">)</span>
+    <span class="n">dyn</span> <span class="o">=</span> <span class="n">NVTBerendsen</span><span class="p">(</span><span class="n">CuC</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span><span class="n">temperature</span><span class="o">=</span><span class="n">i</span><span class="p">,</span><span class="n">taut</span><span class="o">=</span><span class="mf">0.2</span><span class="o">*</span><span class="mi">1000</span><span class="o">*</span><span class="n">units</span><span class="o">.</span><span class="n">fs</span><span class="p">,</span><span class="n">fixcm</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">traj</span> <span class="o">=</span> <span class="n">Trajectory</span><span class="p">(</span><span class="s1">&#39;gap.traj&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">CuC</span><span class="p">)</span>
+    <span class="n">dyn</span><span class="o">.</span><span class="n">attach</span><span class="p">(</span><span class="n">traj</span><span class="o">.</span><span class="n">write</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">dyn</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="mi">100</span><span class="o">*</span><span class="n">N</span><span class="p">[</span><span class="n">tt</span><span class="p">])</span>
+    <span class="n">out_traj</span> <span class="o">=</span> <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;gap.traj&#39;</span><span class="p">,</span> <span class="s1">&#39;:&#39;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;mkdir &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">out_traj</span><span class="p">:</span>
+        <span class="n">at</span><span class="o">.</span><span class="n">wrap</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;momenta&#39;</span> <span class="ow">in</span> <span class="n">at</span><span class="o">.</span><span class="n">arrays</span><span class="p">:</span> <span class="k">del</span> <span class="n">at</span><span class="o">.</span><span class="n">arrays</span><span class="p">[</span><span class="s1">&#39;momenta&#39;</span><span class="p">]</span>
+        <span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span><span class="o">%</span><span class="mi">100</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+            <span class="n">dir_i</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;/&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;/&quot;</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;mkdir &quot;</span><span class="o">+</span><span class="n">dir_i</span><span class="o">+</span><span class="s2">&quot;;</span><span class="se">\</span>
+<span class="s2">                       cp KPOINTS POTCAR &quot;</span><span class="o">+</span><span class="n">dir_i</span><span class="o">+</span><span class="s2">&quot;;</span><span class="se">\</span>
+<span class="s2">                       cp INCAR-static &quot;</span><span class="o">+</span><span class="n">dir_i</span><span class="o">+</span><span class="s2">&quot;INCAR&quot;</span><span class="p">)</span>
+            <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dir_i</span><span class="o">+</span><span class="s2">&quot;POSCAR&quot;</span><span class="p">,</span><span class="n">out_traj</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;cd &quot;</span><span class="o">+</span><span class="n">dir_i</span><span class="o">+</span><span class="s2">&quot;;&quot;</span><span class="o">+</span><span class="n">runvasp</span><span class="o">+</span><span class="s2">&quot;cd ../..&quot;</span><span class="p">)</span>
+    <span class="n">ase</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_gap.xyz&quot;</span><span class="p">,</span><span class="n">out_traj</span><span class="p">[</span><span class="mi">99</span><span class="p">::</span><span class="mi">100</span><span class="p">])</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;cd &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;; </span><span class="se">\</span>
+<span class="s2">               for i in *; do </span><span class="se">\</span>
+<span class="s2">                 cd $i;</span><span class="se">\</span>
+<span class="s2">                 outcar2xyz.sh;</span><span class="se">\</span>
+<span class="s2">                 cat all.xyz &gt;&gt; ../../&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;_vasp.xyz;</span><span class="se">\</span>
+<span class="s2">                 cat all.xyz &gt;&gt; ../../all.xyz;</span><span class="se">\</span>
+<span class="s2">                 cd ..;</span><span class="se">\</span>
+<span class="s2">               done;</span><span class="se">\</span>
+<span class="s2">               cd ..&quot;</span><span class="p">)</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">gap_fit</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;cp gap_soap.xml gap_&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s2">&quot;.xml&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To get GP error, use:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">quip</span> <span class="n">verbosity</span><span class="o">=</span><span class="n">ANALYSIS</span> <span class="n">atoms_filename</span><span class="o">=</span><span class="n">test</span><span class="o">.</span><span class="n">xyz</span> <span class="n">param_filename</span><span class="o">=</span><span class="n">gap_soap</span><span class="o">.</span><span class="n">xml</span> <span class="n">E</span><span class="o">=</span><span class="n">T</span> <span class="n">F</span><span class="o">=</span><span class="n">T</span> <span class="n">L</span><span class="o">=</span><span class="n">T</span> <span class="n">calc_args</span><span class="o">=</span><span class="s2">&quot;local_gap_variance&quot;</span> <span class="n">output_file</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">out</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="calc_MSD_lipai_full.html" class="btn btn-neutral float-right" title="Calculate MSD from unwraped XYZ file (Python/Fortran)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../ml.html" class="btn btn-neutral float-left" title="Machine Learning tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2023, lipai@mail.ustc.edu.cn.
+      <span class="lastupdated">
+        Last updated on Mar 06, 2021.
+      </span>
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

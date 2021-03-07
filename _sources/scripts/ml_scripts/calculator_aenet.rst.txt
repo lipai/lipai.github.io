@@ -1,0 +1,119 @@
+Aenet calculator that can be used in ASE 
+===========
+An official api has actually been provided in Aenet package, but a parallel version has yet to be given.
+
+这个calculator根据turbomole.py仿写 扔掉了update与否的检查 直接使用在做动力学计算的时候会因为写xsf文件(力)而出现死循环. 因此,删除io/xsf.py中求力的部分.不在xsf中写入力. optimization可能出问题
+
+::
+
+    from __future__ import print_function
+    """This module defines an ASE interface to AENET
+    
+    writen by lipai@mail.ustc.edu.cn
+    """
+    import os
+    import sys
+    
+    import numpy as np
+    
+    #from ase.units import Hartree, Bohr
+    from ase.io import read, write
+    from ase.calculators.general import Calculator
+    
+    
+    class Aenet(Calculator):
+        def __init__(self, label='aenet',
+                     calculate='predict.x predict.in'):
+            self.label = label
+            
+            # set calculators for energy and forces
+            self.calculate = calculate
+    
+            # aenet has no stress
+            self.stress = np.empty(6)
+            
+            # storage for energy and forces
+            self.e_total = None
+            self.forces = None
+            self.updated = False
+            
+            # atoms must be set
+            self.atoms = None
+    
+            #lipai
+            self.count=0
+    
+        def initialize(self, atoms):
+            self.numbers = atoms.get_atomic_numbers().copy()
+            self.species = []
+            for a, Z in enumerate(self.numbers):
+                self.species.append(Z)
+            
+        def execute(self, command):
+            from subprocess import Popen, PIPE
+            self.count=self.count+1
+            print(self.count)
+            try:
+                # the sub process gets started here
+                proc = Popen([command], shell=True, stderr=PIPE)
+                error = proc.communicate()[1]
+            except OSError as e:
+                print('Execution failed:', e, file=sys.stderr)
+                sys.exit(1)
+    
+        def calc_e_f(self,atoms):
+            # if update of calc is necessary
+            if self.updated:
+                return
+            self.execute(self.calculate + ' > out')
+            self.read_energy()
+            self.read_forces()
+            self.updated = True
+            
+        def get_potential_energy(self, atoms):
+            self.set_atoms(atoms)
+            self.calc_e_f(atoms)
+            return self.e_total
+    
+        def get_forces(self, atoms):
+            self.set_atoms(atoms)
+            self.calc_e_f(atoms)
+            return self.forces.copy()
+        
+        def get_stress(self, atoms):
+            return self.stress
+    
+        def set_atoms(self, atoms):
+            if self.atoms == atoms and self.updated==True:
+                return
+                #if (self.updated and os.path.isfile('in.xsf')):
+                #    self.updated = False
+                #    a = read('in.xsf').get_positions()
+                #    if np.allclose(a, atoms.get_positions(), rtol=0, atol=1e-13):
+                #        return
+                #else:
+                #    return
+            ## performs an update of the atoms
+            write('in.xsf', atoms)
+            Calculator.set_atoms(self, atoms)
+            # energy and forces must be re-calculated
+            self.updated=False
+            
+        def read_energy(self):
+            """Read Energy from ."""
+            self.e_total=float(os.popen("grep  Cohesive out |awk '{print $4}'").readline())
+    
+        def read_forces(self):
+            """Read Forces from aenet gradient file."""
+            os.system("awk '/\(Ang\)/,/Cohesive/{if(NF>6) print $5,$6,$7}' out>forces")
+            self.forces=np.loadtxt("forces")
+    
+        def calculation_required(self, atoms, properties):
+            if self.atoms != atoms:
+                return True
+            for prop in properties:
+                if prop == 'energy' and self.e_total is None:
+                    return True
+                elif prop == 'forces' and self.forces is None:
+                    return True
+            return False
