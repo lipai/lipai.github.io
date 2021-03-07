@@ -35,6 +35,14 @@ Scripts and codes:
    scripts/ml.rst
    scripts/python.rst
 
+Blog Articles:
+---------
+
+.. toctree::
+   :maxdepth: 3
+
+   articles/how_to_calc_vasp+neb.rst
+
 Tutorials:
 ---------
 

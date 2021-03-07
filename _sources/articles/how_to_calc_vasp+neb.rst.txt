@@ -1,0 +1,176 @@
+**VASP-VTST计算过渡态(NEB方法)具体过程**
+----
+
+这篇文章是我15年写的，放在新浪博客上面。大概是新浪博客容易丢数据，以前的一些博文图片经常就看不到了，后来几篇文章无缘无故被设成了私密，自己也改不了权限，再后来有些文章就彻底丢了。这篇博文讲VASP+NEB方法的具体使用，讲的比较详细，大概对一些做理论计算的人有帮助，阅读量和转载量都不错，文章丢了有点可惜，现在从网上翻出了文字，自己补上图片，重新发一遍。
+
+
+基本原理
+====
+
+Eyring equation（势垒与温度决定反应速率）
+
+.. figure::  fig/1.png
+   :align:   center
+
+NEB方法（撒点，弹簧力；详情参考下面给出的文献）
+
+.. figure::  fig/2.png
+   :align:   center
+
+.. figure::  fig/3.png
+   :align:   center
+
+CL-NEB方法（爬坡的NEB，使得其中一个点跑到势能面鞍点，即过渡态）
+
+.. figure::  fig/4.png
+   :align:   center
+
+VASP-vtst提供的NEB优化算法（IOPT参数）
+
+vtst脚本包
+====
+
+一些用perl语言写的脚本，不错的处理neb计算的工具箱。详情请进：http://theory.cm.utexas.edu/vtsttools/scripts.html
+
+后面所有后缀名为pl的脚本都来自这里。
+
+步骤一：初末态结构优化
+====
+
+建立两个文件夹ini(初态的意思),fin(末态)，每个文件夹放入vasp计算必备的四个文件（INCAR，POSCAR，KPOINTS，POTCAR），其中的两个POSCAR对应未优化的初末态。确保两个文件夹里面除POSCAR外，其他文件完全一样。
+
+对于两个POSCAR，注意每一行的原子一一对应。若有固定位置的原子（比方做表面计算，要固定底部1-2层原子），最好让两个POSCAR里面的固定原子位置完全相同。
+
+以H在Cu111表面的扩散为例，下图是我的两个优化结构
+
+ini/fin
+
+.. figure::  fig/5.png
+   :align:   center
+
+用dist.pl检查两个优化后结构(两个CONTCAR)的相似程度（每个对应原子的初末态距离的平方和，再开根号）。
+
+具体命令为： dist.pl ini/CONTCAR fin/CONTCAR
+
+.. figure::  fig/6.png
+   :align:   center
+
+
+若返回值小于5A，一般可以进行下一步。
+ 
+
+步骤二：插点
+====
+
+插点的数目取决于前面dist.pl的返回值，一般插点数目可取（dist.pl返回值/0.8）。
+
+具体插点的命令： nebmake.pl ini/CONTCAR fin/CONTCAR N
+
+最后的N表示插点数目。插入点的算法为线性插值，详情请进前面给的vtst脚本链接。我这里设置N为3，执行完命令后出现文件夹00，01，02，03，04.五个文件夹里面都有nebmake.pl产生的POSCAR。
+
+00表示初态，里面放的是ini/CONTCAR,04表示末态，放的是fin/CONTCAR, 01、02、03是插入的点。
+
+ 
+
+输出中提示讲初末态对应的OUTCAR复制到对应的文件夹中，以便后续数据分析。即
+
+.. figure::  fig/7.png
+   :align:   center
+
+
+检查插入点的合理性：
+
+输入命令 nebmovie.pl 0
+
+参数0表示用POSCAR生成xyz文件；还可取1，为用CONTCAR生成。
+
+ 
+
+可以看到每个文件夹内多了一个后缀名为xyz的文件。将这几个xyz文件合成一个movie.xyz文件即可在VMD中动画演示。我更倾向于使用jmol(或者ovito)来查看xyz文件，不过VMD可能大家更熟悉。
+
+ 
+
+用nebmovie.pl,没有直接生成movie.xyz是因为从官方主页下载的脚本默认当使用nebmovie.pl后面不带参数或者参数为0的时候(即使用POSCAR产生xyz)，不输出movie.xyz。 你想让脚本自动生成movie.xyz而不是自己去合并各个文件夹里面的xyz文件，需要自行修改nebmovie.pl文件。很简单，把倒数第二个if语句整个用#注释掉或者直接删掉即可。
+
+也可以直接用VESTA查看01的POSCAR。
+
+ 
+
+进一步可用命令nebavoid.pl 1,确保中间插入的点每一个原子间距都大于1A。该命令的参数1表示最小允许间距，可取小数。
+
+.. figure::  fig/8.png
+   :align:   center
+
+
+上面输出表示没有原子间距小于1A。
+
+原子间距太小说明结构有问题。要么是因为初末态POSCAR里的原子没有对应好，要么是因为nebmake.pl线性插值的方法不适用于估计反应路径路径。如果是前者，调整好对应原子，也就是CONTCAR里面相应行进行调换；如果是后者，用Materials studio之类的软件调整好结构，再放入对应文件夹。
+
+步骤三：其它文件的准备
+====
+
+在当前目录下面放入KPOINTS，POTCAR及INCAR文件。要求KPOINTS和POTCAR与ini、fin文件夹中的一样；INCAR中的基本参数也与初末态计算的INCAR一样，另外再加入NEB计算的相关参数。
+
+我的结构优化的INCAR：
+
+.. figure::  fig/9.png
+   :align:   center
+
+
+我的NEB计算的INCAR：
+
+.. figure::  fig/10.png
+   :align:   center
+
+
+INCAR再多说两句。优化算法若想使用vtst的，需要如上设置IBRION=3,POTIM=0,IOPT设置见本文第四个图。若使用vasp自带的优化器，可以使用IBRION=1或者3，不要取2；POTIM取合适的值（0.01-0.5范围内去尝试）。
+
+这样就可以提交NEB任务了。
+
+步骤四：后续处理
+====
+
+计算过程中，可以用nebef.pl命令（不带参数）查看计算收敛情况。
+
+.. figure::  fig/11.png
+   :align:   center
+ 
+
+
+输出中，第二列即为最大受力（force of images in the neb），第三列为相应结构的能量。
+
+前面INCAR中EDIFFG设置为-0.02（一般结构优化可取-0.02，NEB计算取-0.03），表示当所有结构最大力小于0.02eV/A时，结束计算。上图中的力都小于0.02，此时已经完全收敛，计算结束。
+
+另一个可以用来观察收敛情况的命令是nebbarrier.pl（同样不带参数）。该命令没有输出到屏幕的内容，而是生成neb.dat文件。
+
+.. figure::  fig/12.png
+   :align:   center
+
+
+neb.dat文件第二列表示距离（即临近两结构的dist.pl的计算结果），第三列表示能量（以初态能量为参考值），第四列为力（forces along the neb）。
+
+EDIFFG参数对应的力是nebef.pl输出中的force of images in the neb.
+
+计算完成后，使用命令nebresult.pl.
+
+ 
+
+nebresult.pl做的事情如其所输出表明的，完成了nebbarrier.pl, nebspline.pl, nebef.pl, nebmovie.pl, nebjmovie.pl, nebconverge.pl还有对各文件夹中的OUTCAR打包压缩。生成了很多文件。其中mep.eps是以dist.pl距离为横坐标，能量为纵坐标画出的能势垒图，如下：
+
+.. figure::  fig/13.png
+   :align:   center
+
+该文件一般查看图片的软件打不开，推荐使用EPS/PS viewer. https://epsviewer.org/download.aspx
+
+生成的spline.dat文件是对上面几个点的拟合曲线数据，已经有了上图，这些数据就意义不大了。
+
+生成的vaspgr文件夹内是各个插点结构的收敛图（同样可用EPS/PS viewer打开），如下vaspout1.eps是01结构收敛信息：
+
+.. figure::  fig/14.png
+   :align:   center
+
+
+结束语：
+
+NEB计算，收敛是个核心问题，可以参见我的涉及NEB计算的其他博文。
+
